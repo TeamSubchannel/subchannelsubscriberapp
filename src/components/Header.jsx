@@ -3,11 +3,11 @@ import styled from "styled-components";
 import { Title2 } from "../theme/index";
 
 const Div = styled.div`
-    width: 100%;
-    background: opacity: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  width: 100%;
+  background: rgba(0, 0, 0, 0);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const Circle = styled.div`

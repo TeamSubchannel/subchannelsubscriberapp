@@ -1,28 +1,71 @@
 import React, { Component } from "react";
-import styled from "styled-components";
+import { Wrapper } from "../theme/index";
 import Player from "../components/Player";
 import Schedule from "../components/Schedule";
-
-export const Wrapper = styled.div`
-  display: grid;
-  height: 100%;
-  grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: 65px 1fr 1fr 1fr 1fr 225px;
-  grid-template-areas:
-    "p p p p p p"
-    "p p p p p p"
-    "p p p p p p"
-    "p p p p p p"
-    "p p p p p p"
-    "s s s s s s";
-`;
+import Modal from "../shared/Modal";
+import Login from "../components/Login";
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      videos: [],
+      isUserLoggedIn: true
+    };
+  }
+
+  // componentDidMount() {
+  //   this.setState(() => {
+  //     return {
+  //       videos: [...this.state.videos, this.dummyData()]
+  //     };
+  //   });
+  // }
+
+  dummyData = () => {
+    return [
+      {
+        name: "Video1",
+        length: 4790,
+        thumbnail: "",
+        url: ""
+      },
+      {
+        name: "Video2",
+        length: 4790,
+        thumbnail: "",
+        url: ""
+      },
+      {
+        name: "Video3",
+        length: 4790,
+        thumbnail: "",
+        url: ""
+      },
+      {
+        name: "Video4",
+        length: 4790,
+        thumbnail: "",
+        url: ""
+      },
+      {
+        name: "Video5",
+        length: 4790,
+        thumbnail: "",
+        url: ""
+      }
+    ];
+  };
+
   render() {
+    const { isUserLoggedIn } = this.state;
     return (
       <Wrapper>
         <Player />
-        <Schedule />
+        <Schedule videos={this.dummyData()} />
+        <Modal show={!isUserLoggedIn}>
+          <Login />
+        </Modal>
       </Wrapper>
     );
   }
