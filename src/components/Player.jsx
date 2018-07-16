@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import Header from "./Header";
+import Title from "./Title";
 
 const Div = styled.div`
   grid-area: p;
@@ -16,6 +17,7 @@ class Player extends Component {
     return (
       <Div>
         <Header />
+        <Title />
       </Div>
     );
   }

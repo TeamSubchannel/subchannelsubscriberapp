@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import { Title2 } from "../theme/index";
 
 const Div = styled.div`
     width: 100%;
@@ -10,8 +11,8 @@ const Div = styled.div`
 `;
 
 const Circle = styled.div`
-  width: 25px;
-  height: 25px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background-color: #ccc;
 `;
@@ -20,7 +21,7 @@ class Header extends Component {
   render() {
     return (
       <Div>
-        <h2 style={{ color: "#fff", margin: "0.25em 0" }}>Logo</h2>
+        <Title2>Logo</Title2>
         <Circle />
       </Div>
     );
