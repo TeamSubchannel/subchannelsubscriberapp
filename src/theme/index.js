@@ -77,7 +77,7 @@ export const Button = styled.button`
   ${props =>
     props.larger &&
     css`
-      width: 110px;
+      width: 115px;
     `};
   ${props =>
     props.signup &&
