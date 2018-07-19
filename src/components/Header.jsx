@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { Title2 } from "../theme/index";
 
-const Div = styled.div`
+const Div = styled.div.attrs({
+  background: props => props.background
+})`
   width: 100%;
   background: rgba(0, 0, 0, 0);
   display: flex;

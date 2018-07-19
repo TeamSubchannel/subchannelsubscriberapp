@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { Redirect, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import App from "./screens/App";
-// import Profile from '';
+import Profile from "./screens/Profile";
 
 // function isAuthenticated() {
 //   return localStorage.getItem("authorization");
@@ -43,8 +43,8 @@ import App from "./screens/App";
 class Router extends Component {
   render() {
     return (
-      <div className="Router">
-        <div>
+      <div id="router">
+        <BrowserRouter>
           <Switch>
             {/* <DefaultRoute exact path="/" component={Login} />
             <DefaultRoute exact path="/login" component={Login} />
@@ -57,9 +57,10 @@ class Router extends Component {
             <Route path="/upgrade/:starter" component={Upgrade} />
             <Route path="/upgrade/:pro" component={Upgrade} />
             <PrivateRoute path="/dashboard/manage" component={Dashboard} /> */}
-            <Route path="/" component={App} />
+            <Route exact path="/" component={App} />
+            <Route path="/profile" component={Profile} />
           </Switch>
-        </div>
+        </BrowserRouter>
       </div>
     );
   }
