@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import Header from "../components/Header";
-import { Column, Title2, Text } from "../theme/index";
+import Header from "../../components/Header";
+import { Column, Title2, Text } from "../../theme/index";
 
 const Div = styled.div`
   width: 100%;

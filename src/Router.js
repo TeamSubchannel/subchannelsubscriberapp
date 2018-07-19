@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import App from "./screens/App";
-import Profile from "./screens/Profile";
+import Profile from "./screens/Profile/Profile";
 
 // function isAuthenticated() {
 //   return localStorage.getItem("authorization");
