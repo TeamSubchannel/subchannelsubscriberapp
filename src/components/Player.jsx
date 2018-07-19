@@ -8,7 +8,6 @@ const Div = styled.div`
   background-color: #777777;
   box-sizing: border-box;
   width: 100%;
-  padding: 0.5em;
   height: 100%;
 `;
 

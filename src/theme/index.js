@@ -42,9 +42,10 @@ export const Title1 = styled.h1`
 
 export const Title2 = styled.h2`
   font-family: "Montserrat", sans-serif;
-  color: ${props => props.color || "#fff"};
+  color: ${props => (props.dark ? "#686868" : "#fff")};
   margin: ${props => props.margin || ".25em 0"}
   font-size: ${props => props.fontsize || "2em"}
+  
 `;
 
 export const Text = styled.p`

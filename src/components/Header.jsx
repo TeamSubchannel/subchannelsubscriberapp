@@ -6,7 +6,7 @@ const Div = styled.div.attrs({
   background: props => props.background
 })`
   width: 100%;
-  background: rgba(0, 0, 0, 0);
+  background: ${props => props.background || "rgba(0, 0, 0, 0)"};
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -17,13 +17,18 @@ const Circle = styled.div`
   height: 40px;
   border-radius: 50%;
   background-color: #ccc;
+  margin-right: 0.5em;
+`;
+
+const StyledTitle2 = styled(Title2)`
+  margin-left: 0.5em;
 `;
 
 class Header extends Component {
   render() {
     return (
-      <Div>
-        <Title2>Logo</Title2>
+      <Div background={this.props.background}>
+        <StyledTitle2>Logo</StyledTitle2>
         <Circle />
       </Div>
     );

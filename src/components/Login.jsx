@@ -106,9 +106,9 @@ const UserLoginForm = props => (
             justifycontent="space-between"
           >
             <Text>Forgot Password</Text>
-            <a>
+            <Link>
               <Text color="#019095">Signup</Text>
-            </a>
+            </Link>
           </Row>
         </form>
       )}
