@@ -187,6 +187,10 @@ export const Input = styled.input`
       border: 1px solid transparent;
       color: #9d9d9d;
       cursor: default;
+      pointer-events: none;
+      &:focus {
+        border: 1px solid transparent;
+      }
     `};
 `;
 
@@ -198,6 +202,11 @@ export const Label = styled.label`
   font-size: 0.8em;
   margin: ${props => props.margin};
   position: relative;
+  ${props =>
+    props.notactive &&
+    css`
+      pointer-events: none;
+    `};
 `;
 
 export const UserWarn = styled.div`
