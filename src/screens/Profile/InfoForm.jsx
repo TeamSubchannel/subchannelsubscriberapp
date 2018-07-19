@@ -69,7 +69,7 @@ export default function InfoForm({
           <Form onSubmit={handleSubmit}>
             <Row alignitems="center" justifycontent="space-between">
               <Label notactive={editdetailstype === "email" ? false : true}>
-                Email *
+                Email
                 {touched.email &&
                   errors.email && (
                     <UserWarn left="4em">
@@ -104,7 +104,7 @@ export default function InfoForm({
             </Row>
             <Row alignitems="center" justifycontent="space-between">
               <Label notactive={editdetailstype === "password" ? false : true}>
-                Password *
+                Password
                 {touched.password &&
                   errors.password && (
                     <UserWarn left="6em">
