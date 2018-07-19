@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { Title2 } from "../theme/index";
+import { Link } from "react-router-dom";
 
 const Div = styled.div.attrs({
   background: props => props.background
@@ -28,7 +29,9 @@ class Header extends Component {
   render() {
     return (
       <Div background={this.props.background}>
-        <StyledTitle2>Logo</StyledTitle2>
+        <Link to="/">
+          <StyledTitle2>Logo</StyledTitle2>
+        </Link>
         <Circle />
       </Div>
     );
