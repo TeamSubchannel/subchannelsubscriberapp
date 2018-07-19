@@ -43,7 +43,7 @@ const UserLoginForm = props => (
         isSubmitting
       }) => (
         <form onSubmit={handleSubmit}>
-          <Title2 fontsize="2.2em" color="#4d4d4d" margin=".7em 0 .7em 1em">
+          <Title2 fontsize="2.2em" dark margin=".7em 0 .7em 1em">
             Login
           </Title2>
           <Column alignitems="center">
@@ -106,7 +106,7 @@ const UserLoginForm = props => (
             justifycontent="space-between"
           >
             <Text>Forgot Password</Text>
-            <Link>
+            <Link to="/">
               <Text color="#019095">Signup</Text>
             </Link>
           </Row>
