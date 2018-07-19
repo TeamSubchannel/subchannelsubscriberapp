@@ -22,6 +22,8 @@ export const Row = styled.div`
   justify-content: ${props => props.justifycontent};
   padding: ${props => props.padding};
   margin: ${props => props.margin};
+  width: ${props => props.width};
+  height: ${props => props.height};
 `;
 
 export const Column = styled.div`
@@ -29,6 +31,7 @@ export const Column = styled.div`
   flex-direction: column;
   align-items: ${props => props.alignitems};
   justify-content: ${props => props.justifycontent};
+  margin: ${props => props.margin};
 `;
 
 // TEXT
@@ -96,6 +99,54 @@ export const Button = styled.button`
         border: none;
       }
     `};
+  ${props =>
+    props.save &&
+    css`
+      width: 70px;
+      height: 30px;
+      background-color: #019095;
+      color: #fff;
+      margin: ${props => props.margin || "0 0 0 .8em"}
+      border: none;
+      &:hover {
+        background-color: #01a0a6;
+        cursor: pointer;
+        color: #fff;
+        border: none;
+      }
+    `};
+  ${props =>
+    props.cancel &&
+    css`
+        width: 70px;
+        height: 30px;
+        background-color: #ccc;
+        color: #fff;
+        margin: ${props => props.margin || "0 0 0 .8em"}
+        border: none;
+        &:hover {
+          background-color: #ddd;
+          cursor: pointer;
+          color: #fff;
+          border: none;
+        }
+      `};
+  ${props =>
+    props.extralarge &&
+    css`
+      width: 200px;
+      height: 40px;
+      background-color: ${props => props.backgroundcolor};
+      color: #fff;
+      margin-top: 0.8em;
+      border: none;
+      &:hover {
+        background-color: ${props => props.hovercolor};
+        cursor: pointer;
+        color: #fff;
+        border: none;
+      }
+    `};
 `;
 
 // ICONS
@@ -123,13 +174,24 @@ export const Input = styled.input`
   cursor: text;
   border-radius: 3px;
   border: ${props => props.border || "1px solid #ccc"};
-  font-family: "Open Sans", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 1em;
   padding: 0em 1em;
   outline: none;
   &:focus {
-    border: 1px solid ${props => props.theme.primary};
+    border: 1px solid #168787;
   }
+  ${props =>
+    props.notactive &&
+    css`
+      border: 1px solid transparent;
+      color: #9d9d9d;
+      cursor: default;
+      pointer-events: none;
+      &:focus {
+        border: 1px solid transparent;
+      }
+    `};
 `;
 
 export const Label = styled.label`
@@ -140,6 +202,11 @@ export const Label = styled.label`
   font-size: 0.8em;
   margin: ${props => props.margin};
   position: relative;
+  ${props =>
+    props.notactive &&
+    css`
+      pointer-events: none;
+    `};
 `;
 
 export const UserWarn = styled.div`

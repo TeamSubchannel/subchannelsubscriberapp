@@ -23,7 +23,7 @@ const UserLoginForm = props => (
         let errors = {};
 
         if (!values.email) {
-          errors.email = "A username is required";
+          errors.email = "An email is required";
         }
 
         if (!values.password) {
