@@ -96,6 +96,22 @@ export const Button = styled.button`
         border: none;
       }
     `};
+  ${props =>
+    props.save &&
+    css`
+      width: 70px;
+      height: 30px;
+      background-color: #019095;
+      color: #fff;
+      margin-left: 0.8em;
+      border: none;
+      &:hover {
+        background-color: #01a0a6;
+        cursor: pointer;
+        color: #fff;
+        border: none;
+      }
+    `};
 `;
 
 // ICONS
@@ -123,13 +139,20 @@ export const Input = styled.input`
   cursor: text;
   border-radius: 3px;
   border: ${props => props.border || "1px solid #ccc"};
-  font-family: "Open Sans", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 1em;
   padding: 0em 1em;
   outline: none;
   &:focus {
-    border: 1px solid ${props => props.theme.primary};
+    border: 1px solid #168787;
   }
+  ${props =>
+    props.notactive &&
+    css`
+      border: 1px solid transparent;
+      color: #9d9d9d;
+      cursor: default;
+    `};
 `;
 
 export const Label = styled.label`
