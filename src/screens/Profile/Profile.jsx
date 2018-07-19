@@ -3,19 +3,14 @@ import styled from "styled-components";
 import Header from "../../components/Header";
 import InfoForm from "./InfoForm";
 import PaymentsForm from "./PaymentsForm";
-import { Column, Title2, Text, Row } from "../../theme/index";
+import AccountsForm from "./AccountsForm";
+import AlertModal from "../../shared/AlertModal";
+import { Column, Title2, Row } from "../../theme/index";
 
 const Div = styled.div`
   width: 100%;
   height: 100%;
 `;
-
-const Hr = ({ title }) => (
-  <div style={{ width: "70%" }}>
-    <Text>{title}</Text>
-    <hr />
-  </div>
-);
 
 class Profile extends Component {
   constructor(props) {
@@ -28,7 +23,9 @@ class Profile extends Component {
       loaded: false,
       editDetailsType: "",
       card: "",
-      editCardDetails: false
+      editCardDetails: false,
+      isOpen: false,
+      action: ""
     };
   }
 
@@ -70,6 +67,25 @@ class Profile extends Component {
     });
   };
 
+  handleDelete = action => {
+    console.log(action);
+    this.setState(() => {
+      return {
+        isOpen: !this.state.isOpen
+      };
+    });
+  };
+
+  toggleModal = e => {
+    let type = e.target.id;
+    this.setState(() => {
+      return {
+        isOpen: !this.state.isOpen,
+        action: type
+      };
+    });
+  };
+
   render() {
     const loaded = this.state.loaded;
     return (
@@ -92,10 +108,16 @@ class Profile extends Component {
                 editcard={this.editCardDetails}
                 handlecancel={this.handleCancel}
               />
-              <Hr title="Accounts" />
+              <AccountsForm togglemodal={this.toggleModal} />
             </Column>
           )}
         </Column>
+        <AlertModal
+          show={this.state.isOpen}
+          togglemodal={this.toggleModal}
+          handledelete={this.handleDelete}
+          action={this.state.action}
+        />
       </Div>
     );
   }

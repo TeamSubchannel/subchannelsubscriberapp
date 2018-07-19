@@ -131,6 +131,22 @@ export const Button = styled.button`
           border: none;
         }
       `};
+  ${props =>
+    props.extralarge &&
+    css`
+      width: 200px;
+      height: 40px;
+      background-color: ${props => props.backgroundcolor};
+      color: #fff;
+      margin-top: 0.8em;
+      border: none;
+      &:hover {
+        background-color: ${props => props.hovercolor};
+        cursor: pointer;
+        color: #fff;
+        border: none;
+      }
+    `};
 `;
 
 // ICONS
