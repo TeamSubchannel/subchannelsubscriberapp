@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import Header from "../../components/Header";
 import InfoForm from "./InfoForm";
+import PaymentsForm from "./PaymentsForm";
 import { Column, Title2, Text, Row } from "../../theme/index";
 
 const Div = styled.div`
@@ -25,7 +26,9 @@ class Profile extends Component {
         password: ""
       },
       loaded: false,
-      editDetailsType: ""
+      editDetailsType: "",
+      card: "",
+      editCardDetails: false
     };
   }
 
@@ -36,7 +39,8 @@ class Profile extends Component {
           email: "william@subchannel.tv",
           password: "password"
         },
-        loaded: true
+        loaded: true,
+        card: "****-****-****-7880"
       };
     });
   }
@@ -46,6 +50,22 @@ class Profile extends Component {
     this.setState(() => {
       return {
         editDetailsType: type
+      };
+    });
+  };
+
+  editCardDetails = () => {
+    this.setState(() => {
+      return {
+        editCardDetails: true
+      };
+    });
+  };
+
+  handleCancel = () => {
+    this.setState(() => {
+      return {
+        editCardDetails: false
       };
     });
   };
@@ -66,7 +86,12 @@ class Profile extends Component {
                 editdetails={this.editDetails}
                 editdetailstype={this.state.editDetailsType}
               />
-              <Hr title="Payments" />
+              <PaymentsForm
+                card={this.state.card}
+                editcarddetails={this.state.editCardDetails}
+                editcard={this.editCardDetails}
+                handlecancel={this.handleCancel}
+              />
               <Hr title="Accounts" />
             </Column>
           )}

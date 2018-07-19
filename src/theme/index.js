@@ -22,6 +22,8 @@ export const Row = styled.div`
   justify-content: ${props => props.justifycontent};
   padding: ${props => props.padding};
   margin: ${props => props.margin};
+  width: ${props => props.width};
+  height: ${props => props.height};
 `;
 
 export const Column = styled.div`
@@ -29,6 +31,7 @@ export const Column = styled.div`
   flex-direction: column;
   align-items: ${props => props.alignitems};
   justify-content: ${props => props.justifycontent};
+  margin: ${props => props.margin};
 `;
 
 // TEXT
@@ -103,7 +106,7 @@ export const Button = styled.button`
       height: 30px;
       background-color: #019095;
       color: #fff;
-      margin-left: 0.8em;
+      margin: ${props => props.margin || "0 0 0 .8em"}
       border: none;
       &:hover {
         background-color: #01a0a6;
@@ -112,6 +115,22 @@ export const Button = styled.button`
         border: none;
       }
     `};
+  ${props =>
+    props.cancel &&
+    css`
+        width: 70px;
+        height: 30px;
+        background-color: #ccc;
+        color: #fff;
+        margin: ${props => props.margin || "0 0 0 .8em"}
+        border: none;
+        &:hover {
+          background-color: #ddd;
+          cursor: pointer;
+          color: #fff;
+          border: none;
+        }
+      `};
 `;
 
 // ICONS
