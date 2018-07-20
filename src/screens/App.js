@@ -11,7 +11,7 @@ class App extends Component {
     super();
     this.state = {
       videos: [],
-      isUserLoggedIn: false,
+      isUserLoggedIn: true,
       login: true,
       signup: false
     };
@@ -29,29 +29,19 @@ class App extends Component {
     let type = e.target.id;
     console.log(e.target.id);
     if (type === "login") {
-      this.setState(
-        () => {
-          return {
-            login: true,
-            signup: false
-          };
-        },
-        () => {
-          console.log(this.state);
-        }
-      );
+      this.setState(() => {
+        return {
+          login: true,
+          signup: false
+        };
+      });
     } else {
-      this.setState(
-        () => {
-          return {
-            login: false,
-            signup: true
-          };
-        },
-        () => {
-          console.log(this.state);
-        }
-      );
+      this.setState(() => {
+        return {
+          login: false,
+          signup: true
+        };
+      });
     }
   };
 
