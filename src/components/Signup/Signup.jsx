@@ -30,8 +30,17 @@ class Signup extends Component {
     const { stageOne, stageTwo } = this.state;
     return (
       <div>
-        {stageOne && <SignupForm navigate={this.navigate} />}
-        {stageTwo && <Payment frequency={"Monthly"} cost={"$3.99"} />}
+        {stageOne && (
+          <SignupForm navigate={this.navigate} values={this.state.values} />
+        )}
+        {stageTwo && (
+          <Payment
+            frequency={"Monthly"}
+            cost={"$3.99"}
+            navigate={this.navigate}
+            values={this.state.values}
+          />
+        )}
       </div>
     );
   }

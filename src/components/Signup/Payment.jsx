@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { Title2, Column, Row, Text, Label, Button } from "../../theme/index";
-
+import { STAGEONE } from "./Signup";
 import {
   CardNumberElement,
   CardExpiryElement,
@@ -90,6 +90,16 @@ const StyledPostalCodeElement = styled(PostalCodeElement)`
   background: white;
 `;
 
+const Icon = styled.i`
+  color: #4d4d4d;
+  cursor: pointer;
+  margin-right: 0.2em;
+  &:hover {
+    transform: scaleY(1.2);
+    color: #6f6f6f;
+  }
+`;
+
 const style = () => {
   return {
     style: {
@@ -132,16 +142,26 @@ class SplitForm extends Component {
   };
 
   render() {
+    const { values, navigate } = this.props;
     return (
       <form onSubmit={this.handleSubmit}>
-        <Title2 fontsize="2.2em" dark margin=".7em 0 .7em 1em">
-          Payment
-        </Title2>
+        <Row margin=".7em 0 .7em 1em" alignitems="center">
+          <Icon
+            onClick={() => {
+              this.props.navigate(values, STAGEONE);
+            }}
+            className="fa fa-chevron-left"
+          />
+          <Title2 fontsize="2.2em" dark>
+            Payment
+          </Title2>
+        </Row>
         <Column alignitems="center">
           <Row justifycontent="space-between" width="80%" alignitems="center">
             <Text fontweight="600">{this.props.frequency}</Text>
             <Text>{this.props.cost}</Text>
           </Row>
+
           <Row width="80%" margin=".8em 0">
             <Label>
               Card number
@@ -208,7 +228,12 @@ function Payment(props) {
   return (
     <StripeProvider apiKey="pk_test_htmxXHDmuQbnkRcFQirpanLZ">
       <Elements>
-        <Form frequency={props.frequency} cost={props.cost} />
+        <Form
+          frequency={props.frequency}
+          cost={props.cost}
+          navigate={props.navigate}
+          values={props.values}
+        />
       </Elements>
     </StripeProvider>
   );
