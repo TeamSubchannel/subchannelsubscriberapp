@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import styled from "styled-components";
 import SignupForm from "./SignupForm";
 import Payment from "./Payment";
 
@@ -10,8 +9,8 @@ class Signup extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      stageOne: true,
-      stageTwo: false,
+      stageOne: false,
+      stageTwo: true,
       values: {
         email: "",
         password: ""
@@ -20,16 +19,11 @@ class Signup extends Component {
   }
 
   navigate = (values, stage) => {
-    this.setState(
-      {
-        stageOne: stage === STAGEONE,
-        stageTwo: stage === STAGETWO,
-        values: { ...this.state.values, ...values }
-      },
-      () => {
-        console.log(this.state);
-      }
-    );
+    this.setState({
+      stageOne: stage === STAGEONE,
+      stageTwo: stage === STAGETWO,
+      values: { ...this.state.values, ...values }
+    });
   };
 
   render() {
@@ -37,7 +31,7 @@ class Signup extends Component {
     return (
       <div>
         {stageOne && <SignupForm navigate={this.navigate} />}
-        {stageTwo && <Payment />}
+        {stageTwo && <Payment frequency={"Monthly"} cost={"$3.99"} />}
       </div>
     );
   }
