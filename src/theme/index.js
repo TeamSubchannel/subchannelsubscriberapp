@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
   display: grid;
   height: 100%;
   grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: 65px 1fr 1fr 1fr 1fr 225px;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 225px;
   grid-template-areas:
     "p p p p p p"
     "p p p p p p"
@@ -32,6 +32,7 @@ export const Column = styled.div`
   align-items: ${props => props.alignitems};
   justify-content: ${props => props.justifycontent};
   margin: ${props => props.margin};
+  padding: ${props => props.padding};
 `;
 
 // TEXT
