@@ -94,7 +94,10 @@ const Signup = props => (
               </Label>
             </Row>
             <Button signup type="submit" disabled={isSubmitting}>
-              Next
+              NEXT
+              <span>
+                <i className="fa fa-chevron-right" />
+              </span>
             </Button>
           </Column>
           <Row

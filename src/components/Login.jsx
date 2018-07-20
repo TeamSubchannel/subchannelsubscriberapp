@@ -94,7 +94,10 @@ const UserLoginForm = props => (
               </Label>
             </Row>
             <Button signup type="submit" disabled={isSubmitting}>
-              Login
+              LOGIN
+              <span>
+                <i className="fa fa-chevron-right" />
+              </span>
             </Button>
           </Column>
           <Row
