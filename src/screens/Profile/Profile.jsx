@@ -59,6 +59,20 @@ class Profile extends Component {
     });
   };
 
+  handleSubmit = values => {
+    this.setState(
+      () => {
+        return {
+          values,
+          editDetailsType: ""
+        };
+      },
+      () => {
+        console.log(this.state.values);
+      }
+    );
+  };
+
   handleCancel = () => {
     this.setState(() => {
       return {
@@ -101,6 +115,7 @@ class Profile extends Component {
                 values={this.state.values}
                 editdetails={this.editDetails}
                 editdetailstype={this.state.editDetailsType}
+                handlesubmit={this.handleSubmit}
               />
               <PaymentsForm
                 card={this.state.card}

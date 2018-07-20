@@ -11,7 +11,7 @@ class App extends Component {
     super();
     this.state = {
       videos: [],
-      isUserLoggedIn: false,
+      isUserLoggedIn: true,
       login: false,
       signup: true
     };
