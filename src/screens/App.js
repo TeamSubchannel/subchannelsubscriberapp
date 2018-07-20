@@ -4,13 +4,16 @@ import Player from "../components/Player";
 import Schedule from "../components/Schedule";
 import Modal from "../shared/Modal";
 import Login from "../components/Login";
+import Signup from "../components/Signup";
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
       videos: [],
-      isUserLoggedIn: true
+      isUserLoggedIn: false,
+      login: true,
+      signup: false
     };
   }
 
@@ -21,6 +24,36 @@ class App extends Component {
   //     };
   //   });
   // }
+
+  handleClick = e => {
+    let type = e.target.id;
+    console.log(e.target.id);
+    if (type === "login") {
+      this.setState(
+        () => {
+          return {
+            login: true,
+            signup: false
+          };
+        },
+        () => {
+          console.log(this.state);
+        }
+      );
+    } else {
+      this.setState(
+        () => {
+          return {
+            login: false,
+            signup: true
+          };
+        },
+        () => {
+          console.log(this.state);
+        }
+      );
+    }
+  };
 
   dummyData = () => {
     return [
@@ -58,13 +91,14 @@ class App extends Component {
   };
 
   render() {
-    const { isUserLoggedIn } = this.state;
+    const { isUserLoggedIn, login, signup } = this.state;
     return (
       <Wrapper>
         <Player />
         <Schedule videos={this.dummyData()} />
         <Modal show={!isUserLoggedIn}>
-          <Login />
+          {login && <Login handleclick={this.handleClick} />}
+          {signup && <Signup handleclick={this.handleClick} />}
         </Modal>
       </Wrapper>
     );

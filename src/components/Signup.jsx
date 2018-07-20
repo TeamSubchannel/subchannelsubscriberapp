@@ -12,7 +12,7 @@ import {
   Column
 } from "../theme/index";
 
-const UserLoginForm = props => (
+const Signup = props => (
   <div>
     <Formik
       initialValues={{
@@ -44,7 +44,7 @@ const UserLoginForm = props => (
       }) => (
         <form onSubmit={handleSubmit}>
           <Title2 fontsize="2.2em" dark margin=".7em 0 .7em 1em">
-            Login
+            Get started
           </Title2>
           <Column alignitems="center">
             <Row>
@@ -94,7 +94,7 @@ const UserLoginForm = props => (
               </Label>
             </Row>
             <Button signup type="submit" disabled={isSubmitting}>
-              Login
+              Next
             </Button>
           </Column>
           <Row
@@ -105,13 +105,8 @@ const UserLoginForm = props => (
           >
             <Text>Forgot Password</Text>
 
-            <Text
-              styled
-              id="signup"
-              onClick={props.handleclick}
-              color="#019095"
-            >
-              Signup
+            <Text styled id="login" onClick={props.handleclick} color="#019095">
+              Login
             </Text>
           </Row>
         </form>
@@ -120,4 +115,4 @@ const UserLoginForm = props => (
   </div>
 );
 
-export default UserLoginForm;
+export default Signup;
