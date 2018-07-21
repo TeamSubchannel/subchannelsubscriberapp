@@ -17,7 +17,6 @@ const Div = styled.div`
 `;
 
 const StyledRow = styled(Row)`
-  margin: 1em 0 1.5em 1.8em;
   flex-wrap: wrap;
 `;
 
@@ -25,7 +24,7 @@ const StyledText = styled(Text)`
   font-weight: 600;
   color: #fff;
   margin-left: 1em;
-  margin-top: 0.5em;
+  margin-top: 0.2em;
   font-size: 1.2em;
 `;
 

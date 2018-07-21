@@ -4,6 +4,7 @@ import Player from "../components/Player";
 import Schedule from "../components/Schedule";
 import Modal from "../shared/Modal";
 import Login from "../components/Login";
+import styled from "styled-components";
 
 class App extends Component {
   constructor() {
