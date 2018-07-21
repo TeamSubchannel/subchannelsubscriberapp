@@ -148,7 +148,7 @@ class SplitForm extends Component {
         <Row margin=".7em 0 .7em 1em" alignitems="center">
           <Icon
             onClick={() => {
-              this.props.navigate(values, STAGEONE);
+              navigate(values, STAGEONE);
             }}
             className="fa fa-chevron-left"
           />
