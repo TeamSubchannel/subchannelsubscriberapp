@@ -53,6 +53,18 @@ class App extends Component {
         length: 4790,
         thumbnail: "",
         url: ""
+      },
+      {
+        name: "Video5",
+        length: 4790,
+        thumbnail: "",
+        url: ""
+      },
+      {
+        name: "Video5",
+        length: 4790,
+        thumbnail: "",
+        url: ""
       }
     ];
   };

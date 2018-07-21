@@ -2,10 +2,10 @@ import React from "react";
 import styled from "styled-components";
 
 const Div = styled.div`
-  width: 231px;
-  height: 130px;
+  min-width: 231px;
+  min-height: 130px;
   background: #ccc;
-  margin: 0 0.25em;
+  margin: 0.5em 0.35em;
 `;
 
 export default function Video() {
