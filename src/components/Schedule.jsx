@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import Video from "./Video";
-import { Row, Text } from "../theme/index";
+import { Text } from "../theme/index";
 import moment from "moment";
 
 const Div = styled.div`
@@ -16,19 +16,24 @@ const Div = styled.div`
   justify-content: center;
 `;
 
-const StyledRow = styled(Row)`
-  flex-wrap: wrap;
+const VideoDiv = styled.div`
+  display: grid;
+  grid-gap: 10px;
+  width: 90%;
+  margin: 0 auto;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-auto-rows: 115px;
 `;
 
 const StyledText = styled(Text)`
   font-weight: 600;
   color: #fff;
+  margin: 1em 0;
   margin-left: 1em;
-  margin-top: 0.2em;
   font-size: 1.2em;
 `;
 
-let now = moment().format("MMMM Do");
+let now = moment().format("dddd MMMM Do");
 
 class Schedule extends Component {
   render() {
@@ -36,7 +41,7 @@ class Schedule extends Component {
     return (
       <Div>
         <StyledText>{now}</StyledText>
-        <StyledRow>
+        <VideoDiv>
           {videos.map((video, index) => {
             return (
               <Video
@@ -48,7 +53,7 @@ class Schedule extends Component {
               />
             );
           })}
-        </StyledRow>
+        </VideoDiv>
       </Div>
     );
   }
