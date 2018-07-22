@@ -10,6 +10,7 @@ import { Column, Title2, Row } from "../../theme/index";
 const Div = styled.div`
   width: 100%;
   height: 100%;
+  background: #fff;
 `;
 
 class Profile extends Component {
