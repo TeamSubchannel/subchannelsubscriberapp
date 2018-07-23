@@ -6,12 +6,8 @@ export const Wrapper = styled.div`
   display: grid;
   height: 100%;
   grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 225px;
+  grid-template-rows: 525px auto;
   grid-template-areas:
-    "p p p p p p"
-    "p p p p p p"
-    "p p p p p p"
-    "p p p p p p"
     "p p p p p p"
     "s s s s s s";
 `;

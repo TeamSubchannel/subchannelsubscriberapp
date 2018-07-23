@@ -6,21 +6,24 @@ import PaymentsForm from "./PaymentsForm";
 import AccountsForm from "./AccountsForm";
 import AlertModal from "../../shared/AlertModal";
 import { Column, Title2, Row } from "../../theme/index";
+import { connect } from "react-redux";
+import {
+  fetchProfile,
+  updateProfile,
+  UPDATE_PROFILE_SUCCESS
+} from "./redux/actions";
+import { profileData } from "./redux/selector";
 
 const Div = styled.div`
   width: 100%;
   height: 100%;
+  background: #fff;
 `;
 
 class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      values: {
-        email: "",
-        password: ""
-      },
-      loaded: false,
       editDetailsType: "",
       card: "",
       editCardDetails: false,
@@ -30,17 +33,10 @@ class Profile extends Component {
   }
 
   componentDidMount() {
-    this.setState(() => {
-      return {
-        values: {
-          email: "william@subchannel.tv",
-          password: "password"
-        },
-        loaded: true,
-        card: "****-****-****-7880"
-      };
-    });
+    this.props.fetchProfile();
   }
+
+  componentWillReceiveProps(props) {}
 
   editDetails = e => {
     let type = e.target.id;
@@ -60,17 +56,20 @@ class Profile extends Component {
   };
 
   handleSubmit = values => {
-    this.setState(
-      () => {
+
+    this.props.updateProfile(values).then(action => {
+      if (action.type === UPDATE_PROFILE_SUCCESS) {
+        this.props.fetchProfile();
+      } else {
+        this.setState({ error: action.response.data });
+      }
+      this.setState(() => {
         return {
-          values,
           editDetailsType: ""
         };
-      },
-      () => {
-        console.log(this.state.values);
-      }
-    );
+      });
+    });
+
   };
 
   handleCancel = () => {
@@ -101,7 +100,7 @@ class Profile extends Component {
   };
 
   render() {
-    const loaded = this.state.loaded;
+    const loaded = this.props.loading;
     return (
       <Div>
         <Header background="#777" />
@@ -109,23 +108,24 @@ class Profile extends Component {
           <Row margin="2em 0 1em 8em">
             <Title2 dark>Profile</Title2>
           </Row>
-          {loaded && (
-            <Column alignitems="center">
-              <InfoForm
-                values={this.state.values}
-                editdetails={this.editDetails}
-                editdetailstype={this.state.editDetailsType}
-                handlesubmit={this.handleSubmit}
-              />
-              <PaymentsForm
-                card={this.state.card}
-                editcarddetails={this.state.editCardDetails}
-                editcard={this.editCardDetails}
-                handlecancel={this.handleCancel}
-              />
-              <AccountsForm togglemodal={this.toggleModal} />
-            </Column>
-          )}
+
+
+          <Column alignitems="center">
+            <InfoForm
+              email={this.props.email}
+              editdetails={this.editDetails}
+              editdetailstype={this.state.editDetailsType}
+              handleSubmit={this.handleSubmit}
+            />
+            <PaymentsForm
+              card={this.state.card}
+              editcarddetails={this.state.editCardDetails}
+              editcard={this.editCardDetails}
+              handlecancel={this.handleCancel}
+            />
+            <AccountsForm togglemodal={this.toggleModal} />
+          </Column>
+
         </Column>
         <AlertModal
           show={this.state.isOpen}
@@ -138,4 +138,7 @@ class Profile extends Component {
   }
 }
 
-export default Profile;
+export default connect(
+  profileData,
+  { fetchProfile, updateProfile }
+)(Profile);

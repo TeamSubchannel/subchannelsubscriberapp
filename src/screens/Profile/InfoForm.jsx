@@ -31,20 +31,19 @@ const Hr = ({ title }) => (
 );
 
 export default function InfoForm({
-  values,
-  handlesubmit,
+  handleSubmit,
   editdetails,
-  editdetailstype
+  editdetailstype,
+  email
 }) {
   return (
     <Div>
       <Hr title="Info" />
       <Formik
         enableReinitialize
-        initialValues={values}
+        initialValues={{ email: email, password: "password" }}
         validate={values => {
           let errors = {};
-
           if (!values.email) {
             errors.email = "An email is required";
           }
@@ -56,7 +55,9 @@ export default function InfoForm({
           return errors;
         }}
         onSubmit={values => {
-          handlesubmit(values);
+
+          handleSubmit(values);
+
         }}
         render={({
           values,
