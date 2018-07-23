@@ -144,7 +144,7 @@ class SplitForm extends Component {
           .then(action => {
             if (action.type === SIGNUP_SUBSCRIBER_SUCCESS) {
               localStorage.setItem("authorization", action.authToken);
-              // PUSH TO DASH
+              this.props.history.push("/");
             }
           });
       });
@@ -245,6 +245,8 @@ class SplitForm extends Component {
 const Form = injectStripe(SplitForm);
 
 function Payment(props) {
+  console.log(props);
+
   return (
     <StripeProvider apiKey="pk_test_htmxXHDmuQbnkRcFQirpanLZ">
       <Elements>
@@ -255,12 +257,15 @@ function Payment(props) {
           values={props.values}
           signupSubscriber={props.signupSubscriber}
           channel="Subchannel"
+          history={props.history}
         />
       </Elements>
     </StripeProvider>
   );
 }
-export default connect(
-  null,
-  { signupSubscriber }
-)(Payment);
+export default withRouter(
+  connect(
+    null,
+    { signupSubscriber }
+  )(Payment)
+);

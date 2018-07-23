@@ -13,9 +13,8 @@ class App extends Component {
     this.state = {
       videos: [],
       live: {},
-      isUserLoggedIn: false,
-      login: false,
-      signup: true
+      login: true,
+      signup: false
     };
   }
 
@@ -149,12 +148,12 @@ class App extends Component {
   };
 
   render() {
-    const { isUserLoggedIn, login, signup } = this.state;
+    const { login, signup } = this.state;
     return (
       <Wrapper>
         <Player live={this.state.live} />
         <Schedule loadVideo={this.loadVideo} videos={this.dummyData()} />
-        <Modal show={!isUserLoggedIn}>
+        <Modal show={!localStorage.getItem("authorization")}>
           {login && <Login handleclick={this.handleClick} />}
           {signup && <Signup handleclick={this.handleClick} />}
         </Modal>
