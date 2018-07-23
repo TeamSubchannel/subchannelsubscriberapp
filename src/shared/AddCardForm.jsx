@@ -40,22 +40,20 @@ const style = () => {
 };
 
 class Form extends Component {
-  //   handleSubmit = ev => {
-  //     ev.preventDefault();
-  //     if (this.props.stripe) {
-  //       this.props.stripe.createToken().then(payload => {
-  //         let lastFour = payload.token.card.last4;
-  //         this.props.grablastfour(lastFour);
-  //         this.props.addcard({ stripeToken: payload.token.id }).then(action => {
-  //           if (action.type === ADD_CARD_SUCCESS) {
-  //             console.log("Card Details:", action.data);
-  //           }
-  //         });
+  // handleSubmit = ev => {
+  //   ev.preventDefault();
+  //   if (this.props.stripe) {
+  //     this.props.stripe.createToken().then(payload => {
+  //       this.props.addcard({ stripeToken: payload.token.id }).then(action => {
+  //         if (action.type === ADD_CARD_SUCCESS) {
+  //           console.log("Card Details:", action.data);
+  //         }
   //       });
-  //     } else {
-  //       console.log("Stripe.js hasn't loaded yet.");
-  //     }
-  //   };
+  //     });
+  //   } else {
+  //     console.log("Stripe.js hasn't loaded yet.");
+  //   }
+  // };
 
   handleChange = err => {
     if (err.error) {

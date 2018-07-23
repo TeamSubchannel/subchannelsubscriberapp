@@ -21,7 +21,8 @@ class SignupForm extends Component {
         <Formik
           initialValues={{
             email: "",
-            password: ""
+            password: "",
+            name: ""
           }}
           validate={values => {
             let errors = {};
@@ -53,6 +54,28 @@ class SignupForm extends Component {
                 Get started
               </Title2>
               <Column alignitems="center">
+                <Row>
+                  <Label>
+                    Full Name *
+                    {touched.name &&
+                      errors.name && (
+                        <UserWarn left="4em">
+                          <Text color="red" fontsize="1em">
+                            {errors.name}
+                          </Text>
+                        </UserWarn>
+                      )}
+                    <Input
+                      margin=".8em 0"
+                      type="text"
+                      name="name"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.name}
+                      border={touched.name && errors.name && "1px solid red"}
+                    />
+                  </Label>
+                </Row>
                 <Row>
                   <Label>
                     Email *

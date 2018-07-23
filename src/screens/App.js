@@ -4,20 +4,18 @@ import Player from "../components/Player";
 import Schedule from "../components/Schedule";
 import Modal from "../shared/Modal";
 import Login from "../components/Login";
-import ReactDOM from 'react-dom';
+import ReactDOM from "react-dom";
 import Signup from "../components/Signup/Signup";
-
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
       videos: [],
-
+      live: {},
       isUserLoggedIn: false,
       login: false,
       signup: true
-
     };
   }
 

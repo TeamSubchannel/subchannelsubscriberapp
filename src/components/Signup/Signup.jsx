@@ -9,8 +9,8 @@ class Signup extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      stageOne: false,
-      stageTwo: true,
+      stageOne: true,
+      stageTwo: false,
       values: {
         email: "",
         password: ""
@@ -19,11 +19,16 @@ class Signup extends Component {
   }
 
   navigate = (values, stage) => {
-    this.setState({
-      stageOne: stage === STAGEONE,
-      stageTwo: stage === STAGETWO,
-      values: { ...this.state.values, ...values }
-    });
+    this.setState(
+      {
+        stageOne: stage === STAGEONE,
+        stageTwo: stage === STAGETWO,
+        values: { ...this.state.values, ...values }
+      },
+      () => {
+        console.log(this.state);
+      }
+    );
   };
 
   render() {
