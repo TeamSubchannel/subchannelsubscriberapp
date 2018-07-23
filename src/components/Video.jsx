@@ -29,9 +29,14 @@ const StyledText = styled(Text)`
   left: 0.25em;
 `;
 
-export default function Video({ background, name }) {
+export default function Video({ background, name, loadVideo, video }) {
   return (
-    <Div background={background}>
+    <Div
+      background={background}
+      onClick={() => {
+        loadVideo(video);
+      }}
+    >
       <StyledText>{name}</StyledText>
     </Div>
   );
