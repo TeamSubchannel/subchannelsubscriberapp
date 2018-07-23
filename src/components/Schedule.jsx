@@ -50,6 +50,8 @@ class Schedule extends Component {
                 length={video.length}
                 background={`url('${video.thumbnail}')`}
                 url={video.url}
+                loadVideo={this.props.loadVideo}
+                video={video}
               />
             );
           })}

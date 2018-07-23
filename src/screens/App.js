@@ -4,23 +4,45 @@ import Player from "../components/Player";
 import Schedule from "../components/Schedule";
 import Modal from "../shared/Modal";
 import Login from "../components/Login";
+import ReactDOM from "react-dom";
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
       videos: [],
+      live: {},
       isUserLoggedIn: true
     };
   }
 
-  // componentDidMount() {
-  //   this.setState(() => {
-  //     return {
-  //       videos: [...this.state.videos, this.dummyData()]
-  //     };
-  //   });
-  // }
+  componentDidMount() {
+    this.setState(() => {
+      return {
+        // videos: [...this.state.videos, this.dummyData()]
+        live: {
+          name: "Into the woods",
+          length: 4790,
+          url: "",
+          thumbnail:
+            "https://s33.postimg.cc/nwm3ci9rj/nick-scheerbart-32085.jpg"
+        }
+      };
+    });
+  }
+
+  componentWillUpdate() {
+    const node = ReactDOM.findDOMNode(this);
+    this.shouldScrollToBottom =
+      node.scrollTop + node.clientHeight >= node.scrollHeight;
+  }
+
+  componentDidUpdate() {
+    if (this.shouldScrollToBottom) {
+      const node = ReactDOM.findDOMNode(this);
+      node.scrollTop = node.scrollHeight;
+    }
+  }
 
   dummyData = () => {
     return [
@@ -85,25 +107,30 @@ class App extends Component {
         url: "",
         thumbnail:
           "https://s33.postimg.cc/q7fk2wskf/xavier-wendling-333537-unsplash.jpg"
+      },
+      {
+        name: "Into the woods",
+        length: 4790,
+        url: "",
+        thumbnail: "https://s33.postimg.cc/nwm3ci9rj/nick-scheerbart-32085.jpg"
       }
     ];
   };
 
-  live = () => {
-    return {
-      name: "Into the woods",
-      length: 4790,
-      url: "",
-      thumbnail: "https://s33.postimg.cc/nwm3ci9rj/nick-scheerbart-32085.jpg"
-    };
+  loadVideo = video => {
+    this.setState(() => {
+      return {
+        live: video
+      };
+    });
   };
 
   render() {
     const { isUserLoggedIn } = this.state;
     return (
       <Wrapper>
-        <Player live={this.live()} />
-        <Schedule videos={this.dummyData()} />
+        <Player live={this.state.live} />
+        <Schedule loadVideo={this.loadVideo} videos={this.dummyData()} />
         <Modal show={!isUserLoggedIn}>
           <Login />
         </Modal>
