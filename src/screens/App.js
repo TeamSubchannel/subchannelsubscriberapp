@@ -4,15 +4,20 @@ import Player from "../components/Player";
 import Schedule from "../components/Schedule";
 import Modal from "../shared/Modal";
 import Login from "../components/Login";
-import ReactDOM from "react-dom";
+import ReactDOM from 'react-dom';
+import Signup from "../components/Signup/Signup";
+
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
       videos: [],
-      live: {},
-      isUserLoggedIn: true
+
+      isUserLoggedIn: false,
+      login: false,
+      signup: true
+
     };
   }
 
@@ -43,6 +48,26 @@ class App extends Component {
       node.scrollTop = node.scrollHeight;
     }
   }
+
+  handleClick = e => {
+    let type = e.target.id;
+    console.log(e.target.id);
+    if (type === "login") {
+      this.setState(() => {
+        return {
+          login: true,
+          signup: false
+        };
+      });
+    } else {
+      this.setState(() => {
+        return {
+          login: false,
+          signup: true
+        };
+      });
+    }
+  };
 
   dummyData = () => {
     return [
@@ -126,13 +151,14 @@ class App extends Component {
   };
 
   render() {
-    const { isUserLoggedIn } = this.state;
+    const { isUserLoggedIn, login, signup } = this.state;
     return (
       <Wrapper>
         <Player live={this.state.live} />
         <Schedule loadVideo={this.loadVideo} videos={this.dummyData()} />
         <Modal show={!isUserLoggedIn}>
-          <Login />
+          {login && <Login handleclick={this.handleClick} />}
+          {signup && <Signup handleclick={this.handleClick} />}
         </Modal>
       </Wrapper>
     );

@@ -81,7 +81,9 @@ function ConfirmDelete({ togglemodal, handledelete, action }) {
       </StyledRow>
       <Row justifycontent="center" margin="1.5em 0">
         <Text thisfontsize="1.1em" color="#666">
-          Are you sure you want to cancel your plan?
+          Are you sure you want to cancel your
+          {action === "cancelPlan" && " plan?"}
+          {action === "deleteAccount" && " account?"}
         </Text>
       </Row>
       <Row justifycontent="center">

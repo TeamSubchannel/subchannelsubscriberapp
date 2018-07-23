@@ -55,7 +55,9 @@ export default function InfoForm({
           return errors;
         }}
         onSubmit={values => {
+
           handleSubmit(values);
+
         }}
         render={({
           values,

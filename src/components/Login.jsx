@@ -1,6 +1,6 @@
 import React from "react";
 import { Formik } from "formik";
-import { Link } from "react-router-dom";
+
 import {
   Input,
   Button,
@@ -59,7 +59,6 @@ const UserLoginForm = props => (
                     </UserWarn>
                   )}
                 <Input
-                  data-cy="username-input"
                   margin=".8em 0"
                   type="text"
                   name="email"
@@ -82,7 +81,6 @@ const UserLoginForm = props => (
                     </UserWarn>
                   )}
                 <Input
-                  data-cy="user-password-input"
                   margin=".8em 0"
                   type="password"
                   name="password"
@@ -96,7 +94,10 @@ const UserLoginForm = props => (
               </Label>
             </Row>
             <Button signup type="submit" disabled={isSubmitting}>
-              Login
+              LOGIN
+              <span>
+                <i className="fa fa-chevron-right" />
+              </span>
             </Button>
           </Column>
           <Row
@@ -106,9 +107,15 @@ const UserLoginForm = props => (
             justifycontent="space-between"
           >
             <Text>Forgot Password</Text>
-            <Link to="/">
-              <Text color="#019095">Signup</Text>
-            </Link>
+
+            <Text
+              styled
+              id="signup"
+              onClick={props.handleclick}
+              color="#019095"
+            >
+              Signup
+            </Text>
           </Row>
         </form>
       )}

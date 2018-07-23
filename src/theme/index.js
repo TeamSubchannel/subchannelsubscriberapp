@@ -28,6 +28,7 @@ export const Column = styled.div`
   align-items: ${props => props.alignitems};
   justify-content: ${props => props.justifycontent};
   margin: ${props => props.margin};
+  width: ${props => props.width};
   padding: ${props => props.padding};
 `;
 
@@ -52,6 +53,18 @@ export const Text = styled.p`
   font-family: "Montserrat", sans-serif;
   color: ${props => props.color || "#4d4d4d"};
   margin: ${props => props.margin || ".25em 0"};
+  font-weight: ${props => props.fontweight || "300"};
+  ${props =>
+    props.styled &&
+    css`
+      cursor: pointer;
+      font-size: 0.9em;
+      color: #019095;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -khtml-user-select: none;
+      -ms-user-select: none;
+    `};
 `;
 
 // BUTTONS
@@ -70,6 +83,7 @@ export const Button = styled.button`
   font-family: "Montserrat", sans-serif;
   font-size: 0.9em;
   cursor: pointer;
+
   outline: none;
   &:hover {
     color: inherit;
@@ -89,6 +103,8 @@ export const Button = styled.button`
       color: #fff;
       margin-top: 0.8em;
       border: none;
+      padding: 0 1em;
+      justify-content: space-between;
       &:hover {
         background-color: #01a0a6;
         cursor: pointer;

@@ -56,6 +56,7 @@ class Profile extends Component {
   };
 
   handleSubmit = values => {
+
     this.props.updateProfile(values).then(action => {
       if (action.type === UPDATE_PROFILE_SUCCESS) {
         this.props.fetchProfile();
@@ -68,6 +69,7 @@ class Profile extends Component {
         };
       });
     });
+
   };
 
   handleCancel = () => {
@@ -107,6 +109,7 @@ class Profile extends Component {
             <Title2 dark>Profile</Title2>
           </Row>
 
+
           <Column alignitems="center">
             <InfoForm
               email={this.props.email}
@@ -122,6 +125,7 @@ class Profile extends Component {
             />
             <AccountsForm togglemodal={this.toggleModal} />
           </Column>
+
         </Column>
         <AlertModal
           show={this.state.isOpen}
