@@ -7,7 +7,11 @@ import AccountsForm from "./AccountsForm";
 import AlertModal from "../../shared/AlertModal";
 import { Column, Title2, Row } from "../../theme/index";
 import { connect } from "react-redux";
-import { fetchProfile } from "./redux/actions";
+import {
+  fetchProfile,
+  updateProfile,
+  UPDATE_PROFILE_SUCCESS
+} from "./redux/actions";
 import { profileData } from "./redux/selector";
 
 const Div = styled.div`
@@ -20,11 +24,6 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      values: {
-        email: "",
-        password: ""
-      },
-      loaded: false,
       editDetailsType: "",
       card: "",
       editCardDetails: false,
@@ -34,7 +33,7 @@ class Profile extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.email);
+    this.props.fetchProfile();
   }
 
   componentWillReceiveProps(props) {}
@@ -53,6 +52,21 @@ class Profile extends Component {
       return {
         editCardDetails: true
       };
+    });
+  };
+
+  handleSubmit = values => {
+    this.props.updateProfile(values).then(action => {
+      if (action.type === UPDATE_PROFILE_SUCCESS) {
+        this.props.fetchProfile();
+      } else {
+        this.setState({ error: action.response.data });
+      }
+      this.setState(() => {
+        return {
+          editDetailsType: ""
+        };
+      });
     });
   };
 
@@ -84,7 +98,7 @@ class Profile extends Component {
   };
 
   render() {
-    const loaded = this.state.loaded;
+    const loaded = this.props.loading;
     return (
       <Div>
         <Header background="#777" />
@@ -92,23 +106,22 @@ class Profile extends Component {
           <Row margin="2em 0 1em 8em">
             <Title2 dark>Profile</Title2>
           </Row>
-          {loaded && (
-            <Column alignitems="center">
-              <InfoForm
-                // values={}
-                email={this.props.email}
-                editdetails={this.editDetails}
-                editdetailstype={this.state.editDetailsType}
-              />
-              <PaymentsForm
-                card={this.state.card}
-                editcarddetails={this.state.editCardDetails}
-                editcard={this.editCardDetails}
-                handlecancel={this.handleCancel}
-              />
-              <AccountsForm togglemodal={this.toggleModal} />
-            </Column>
-          )}
+
+          <Column alignitems="center">
+            <InfoForm
+              email={this.props.email}
+              editdetails={this.editDetails}
+              editdetailstype={this.state.editDetailsType}
+              handleSubmit={this.handleSubmit}
+            />
+            <PaymentsForm
+              card={this.state.card}
+              editcarddetails={this.state.editCardDetails}
+              editcard={this.editCardDetails}
+              handlecancel={this.handleCancel}
+            />
+            <AccountsForm togglemodal={this.toggleModal} />
+          </Column>
         </Column>
         <AlertModal
           show={this.state.isOpen}
@@ -123,5 +136,5 @@ class Profile extends Component {
 
 export default connect(
   profileData,
-  { fetchProfile }
+  { fetchProfile, updateProfile }
 )(Profile);

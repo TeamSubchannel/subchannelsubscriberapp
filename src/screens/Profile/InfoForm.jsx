@@ -31,8 +31,7 @@ const Hr = ({ title }) => (
 );
 
 export default function InfoForm({
-  values,
-  handlesubmit,
+  handleSubmit,
   editdetails,
   editdetailstype,
   email
@@ -45,7 +44,6 @@ export default function InfoForm({
         initialValues={{ email: email, password: "password" }}
         validate={values => {
           let errors = {};
-
           if (!values.email) {
             errors.email = "An email is required";
           }
@@ -57,7 +55,7 @@ export default function InfoForm({
           return errors;
         }}
         onSubmit={values => {
-          console.log(values);
+          handleSubmit(values);
         }}
         render={({
           values,

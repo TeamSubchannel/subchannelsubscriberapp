@@ -36,12 +36,11 @@ export const updateProfile = data => {
   return dispatch => {
     dispatch(sendingRequest("updateProfile"));
     return client
-      .put("/api/profile", data)
+      .put("/api/subscriber", data)
       .then(res => {
         dispatch(
           receivedResponse("updateProfile", { message: "Saved!" }, "MESSAGE")
         );
-
         return dispatch(updateProfileSuccess(res.data));
       })
       .catch(err =>
