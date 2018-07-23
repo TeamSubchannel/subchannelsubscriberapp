@@ -48,7 +48,7 @@ class Schedule extends Component {
                 key={index}
                 name={video.name}
                 length={video.length}
-                thumbnail={video.thumbnail}
+                background={`url('${video.thumbnail}')`}
                 url={video.url}
               />
             );
