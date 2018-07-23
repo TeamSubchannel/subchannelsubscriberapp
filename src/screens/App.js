@@ -48,7 +48,6 @@ class App extends Component {
 
   handleClick = e => {
     let type = e.target.id;
-    console.log(e.target.id);
     if (type === "login") {
       this.setState(() => {
         return {
@@ -153,7 +152,7 @@ class App extends Component {
       <Wrapper>
         <Player live={this.state.live} />
         <Schedule loadVideo={this.loadVideo} videos={this.dummyData()} />
-        <Modal show={!localStorage.getItem("authorization")}>
+        <Modal height={!login} show={!localStorage.getItem("authorization")}>
           {login && <Login handleclick={this.handleClick} />}
           {signup && <Signup handleclick={this.handleClick} />}
         </Modal>

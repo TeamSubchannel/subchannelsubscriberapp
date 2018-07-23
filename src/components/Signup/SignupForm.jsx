@@ -15,15 +15,14 @@ import {
 
 class SignupForm extends Component {
   render() {
-    const { navigate } = this.props;
+    const { navigate, values } = this.props;
+    console.log(values, "HERE");
+
     return (
       <div>
         <Formik
-          initialValues={{
-            email: "",
-            password: "",
-            name: ""
-          }}
+          enableReinitialize
+          initialValues={values}
           validate={values => {
             let errors = {};
 
@@ -137,7 +136,12 @@ class SignupForm extends Component {
               >
                 <Text>Forgot Password</Text>
 
-                <Text styled id="login" color="#019095">
+                <Text
+                  styled
+                  id="login"
+                  color="#019095"
+                  onClick={this.props.handleclick}
+                >
                   Login
                 </Text>
               </Row>
