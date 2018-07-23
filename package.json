@@ -3,14 +3,23 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.18.0",
     "formik": "^1.0.1",
+    "immutable": "^3.8.2",
     "moment": "^2.22.2",
     "normalize.css": "^8.0.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
+    "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
+    "react-router-redux": "^4.0.8",
     "react-scripts": "1.1.4",
     "react-stripe-elements": "^2.0.1",
+    "redux": "^4.0.0",
+    "redux-immutable": "^4.0.0",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0",
+    "reselect": "^3.0.1",
     "styled-components": "^3.3.3"
   },
   "scripts": {

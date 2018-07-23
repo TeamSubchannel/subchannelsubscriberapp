@@ -6,6 +6,9 @@ import PaymentsForm from "./PaymentsForm";
 import AccountsForm from "./AccountsForm";
 import AlertModal from "../../shared/AlertModal";
 import { Column, Title2, Row } from "../../theme/index";
+import { connect } from "react-redux";
+import { fetchProfile } from "./redux/actions";
+import { profileData } from "./redux/selector";
 
 const Div = styled.div`
   width: 100%;
@@ -31,17 +34,10 @@ class Profile extends Component {
   }
 
   componentDidMount() {
-    this.setState(() => {
-      return {
-        values: {
-          email: "william@subchannel.tv",
-          password: "password"
-        },
-        loaded: true,
-        card: "****-****-****-7880"
-      };
-    });
+    console.log(this.props.email);
   }
+
+  componentWillReceiveProps(props) {}
 
   editDetails = e => {
     let type = e.target.id;
@@ -99,7 +95,8 @@ class Profile extends Component {
           {loaded && (
             <Column alignitems="center">
               <InfoForm
-                values={this.state.values}
+                // values={}
+                email={this.props.email}
                 editdetails={this.editDetails}
                 editdetailstype={this.state.editDetailsType}
               />
@@ -124,4 +121,7 @@ class Profile extends Component {
   }
 }
 
-export default Profile;
+export default connect(
+  profileData,
+  { fetchProfile }
+)(Profile);
