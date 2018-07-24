@@ -25,6 +25,8 @@ class SignupForm extends Component {
     };
   }
   render() {
+    console.log(this.props);
+
     const { navigate, values, verificationEmailCheck } = this.props;
 
     return (
@@ -58,15 +60,16 @@ class SignupForm extends Component {
             return errors;
           }}
           onSubmit={(values, { setSubmitting, setErrors }) => {
-            verificationEmailCheck("Subchannel", values.email)
+            verificationEmailCheck({
+              channelName: "Subchannel",
+              email: values.email
+            })
               .then(action => {
                 if (action.type === VERIFICATION_EMAIL_CHECK_SUCCESS) {
                   navigate(values, STAGETWO);
                   setSubmitting(true);
                 } else {
-                  this.setState({ error: action.response.data }, () => {
-                    console.log(this.state.error);
-                  });
+                  this.setState({ error: action.response.data });
                   setSubmitting(false);
                 }
               })
@@ -89,13 +92,13 @@ class SignupForm extends Component {
                 Get started
               </Title2>
               <Row style={{ position: "relative" }}>
-                {/* {this.state.error && (
-                  <UserWarn left="0">
-                    <Text color="red" thisfontsize=".9em">
+                {this.state.error && (
+                  <UserWarn top="-1.6em" left="2.1em">
+                    <Text color="red" fontsize=".8em">
                       {this.state.error}
                     </Text>
                   </UserWarn>
-                )} */}
+                )}
               </Row>
               <Column alignitems="center">
                 <Row>

@@ -50,7 +50,7 @@ export const verificationEmailCheck = data => {
   return dispatch => {
     dispatch(sendingRequest("verificationEmailCheck"));
     return rawClient
-      .get(`/api/verifyemail/${data.channeName}/${data.email}`)
+      .get(`/api/verifyemail/${data.channelName}/${data.email}`)
       .then(res => {
         receivedResponse("verificationEmailCheck");
         return dispatch(
