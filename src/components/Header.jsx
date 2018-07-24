@@ -4,7 +4,10 @@ import { Title2 } from "../theme/index";
 import { Link } from "react-router-dom";
 import DropdownModal from "../components/DropdownModal";
 import Avatar from "../components/Avatar";
+import { fetchProfile } from "../screens/Profile/redux/actions";
+import { profileData } from "../screens/Profile/redux/selector";
 import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 
 const Div = styled.div.attrs({
   background: props => props.background
@@ -22,22 +25,28 @@ const StyledTitle2 = styled(Title2)`
 `;
 
 class Header extends Component {
-  // getInitials = () => {
-  //   if (this.props.userDetails.get("name", new Map())) {
-  //     let name = `${this.props.userDetails.getIn(
-  //       ["name", "firstName"],
-  //       ""
-  //     )} ${this.props.userDetails.getIn(["name", "lastName"], "")}`;
-  //     let initials = name.match(/\b\w/g) || [];
-  //     initials = (
-  //       (initials.shift() || "") + (initials.pop() || "")
-  //     ).toUpperCase();
-  //     return initials;
-  //   }
-  // };
+  componentDidMount() {
+    this.props.fetchProfile();
+  }
+
+  componentWillReceiveProps(props) {}
+
+  getInitials = () => {
+    let name = `${this.props.firstName} ${this.props.lastName}`;
+    let initials = name.match(/\b\w/g) || [];
+    initials = (
+      (initials.shift() || "") + (initials.pop() || "")
+    ).toUpperCase();
+    return initials;
+  };
 
   onClickOption = val => {
     this.props.history.push(val.link);
+  };
+
+  logout = val => {
+    this.props.history.push(val.link);
+    localStorage.clear();
   };
 
   getOptions = () => {
@@ -59,7 +68,7 @@ class Header extends Component {
 
       {
         label: "Logout",
-        link: "/login",
+        link: "/",
         color: "#f2451a",
         iconClassName: "ace-icon fa fa-power-off",
         onClick: this.logout
@@ -74,7 +83,7 @@ class Header extends Component {
           <StyledTitle2>Logo</StyledTitle2>
         </Link>
         <Avatar
-          initials="WW"
+          initials={this.getInitials()}
           background="#714053"
           render={display => (
             <DropdownModal options={this.getOptions()} display={display} />
@@ -85,4 +94,9 @@ class Header extends Component {
   }
 }
 
-export default withRouter(Header);
+export default withRouter(
+  connect(
+    profileData,
+    { fetchProfile }
+  )(Header)
+);

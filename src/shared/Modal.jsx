@@ -18,7 +18,7 @@ const StyledModal = styled.div`
   background-color: #fff;
   border-radius: 5px;
   width: 385px;
-  height: 370px;
+  height: ${props => (props.large ? "425px" : "380px")};
   margin: 5em auto;
   z-index: 10000000;
 `;
@@ -30,7 +30,9 @@ export default class Modal extends Component {
     }
     return (
       <Backdrop>
-        <StyledModal>{this.props.children}</StyledModal>
+        <StyledModal large={this.props.height}>
+          {this.props.children}
+        </StyledModal>
       </Backdrop>
     );
   }

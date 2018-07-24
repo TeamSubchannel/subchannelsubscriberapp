@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { Title2, Column, Row, Text, Label, Button } from "../../theme/index";
 import { STAGEONE } from "./Signup";
+import { signupSubscriber, SIGNUP_SUBSCRIBER_SUCCESS } from "./redux/actions";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import {
   CardNumberElement,
   CardExpiryElement,
@@ -122,12 +125,29 @@ const style = () => {
 };
 
 class SplitForm extends Component {
-  handleSubmit = e => {
-    e.preventDefault();
+  handleSubmit = ev => {
+    ev.preventDefault();
     if (this.props.stripe) {
-      this.props.stripe
-        .createToken()
-        .then(payload => console.log("[token]", payload));
+      this.props.stripe.createToken().then(payload => {
+        const firstName = this.props.values.name.split(" ", 1);
+        const lastName = this.props.values.name.split(" ", 2);
+        this.props
+          .signupSubscriber({
+            token: payload.token.id,
+            email: this.props.values.email,
+            password: this.props.values.password,
+            firstName: firstName[0],
+            lastName: lastName[1],
+            phone: "4045181276",
+            channelName: this.props.channel
+          })
+          .then(action => {
+            if (action.type === SIGNUP_SUBSCRIBER_SUCCESS) {
+              localStorage.setItem("authorization", action.authToken);
+              this.props.history.push("/");
+            }
+          });
+      });
     } else {
       console.log("Stripe.js hasn't loaded yet.");
     }
@@ -225,6 +245,8 @@ class SplitForm extends Component {
 const Form = injectStripe(SplitForm);
 
 function Payment(props) {
+  console.log(props);
+
   return (
     <StripeProvider apiKey="pk_test_htmxXHDmuQbnkRcFQirpanLZ">
       <Elements>
@@ -233,9 +255,17 @@ function Payment(props) {
           cost={props.cost}
           navigate={props.navigate}
           values={props.values}
+          signupSubscriber={props.signupSubscriber}
+          channel="Subchannel"
+          history={props.history}
         />
       </Elements>
     </StripeProvider>
   );
 }
-export default Payment;
+export default withRouter(
+  connect(
+    null,
+    { signupSubscriber }
+  )(Payment)
+);

@@ -54,6 +54,7 @@ export const Text = styled.p`
   color: ${props => props.color || "#4d4d4d"};
   margin: ${props => props.margin || ".25em 0"};
   font-weight: ${props => props.fontweight || "300"};
+  font-size: ${props => props.fontsize};
   ${props =>
     props.styled &&
     css`
@@ -215,6 +216,7 @@ export const Label = styled.label`
   font-size: 0.8em;
   margin: ${props => props.margin};
   position: relative;
+  border: none;
   ${props =>
     props.notactive &&
     css`
@@ -224,7 +226,7 @@ export const Label = styled.label`
 
 export const UserWarn = styled.div`
   position: absolute;
-  top: -0.2em;
+  top: ${props => props.top || "-.2em"};
   bottom: 0;
   left: ${props => props.left};
   right: 0;

@@ -9,9 +9,10 @@ class Signup extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      stageOne: false,
-      stageTwo: true,
+      stageOne: true,
+      stageTwo: false,
       values: {
+        name: "",
         email: "",
         password: ""
       }
@@ -31,7 +32,11 @@ class Signup extends Component {
     return (
       <div>
         {stageOne && (
-          <SignupForm navigate={this.navigate} values={this.state.values} />
+          <SignupForm
+            handleclick={this.props.handleclick}
+            navigate={this.navigate}
+            values={this.state.values}
+          />
         )}
         {stageTwo && (
           <Payment

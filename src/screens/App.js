@@ -3,21 +3,18 @@ import { Wrapper } from "../theme/index";
 import Player from "../components/Player";
 import Schedule from "../components/Schedule";
 import Modal from "../shared/Modal";
-import Login from "../components/Login";
-import ReactDOM from 'react-dom';
+import Login from "../components/Login/Login";
+import ReactDOM from "react-dom";
 import Signup from "../components/Signup/Signup";
-
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
       videos: [],
-
-      isUserLoggedIn: false,
-      login: false,
-      signup: true
-
+      live: {},
+      login: true,
+      signup: false
     };
   }
 
@@ -51,7 +48,6 @@ class App extends Component {
 
   handleClick = e => {
     let type = e.target.id;
-    console.log(e.target.id);
     if (type === "login") {
       this.setState(() => {
         return {
@@ -151,12 +147,12 @@ class App extends Component {
   };
 
   render() {
-    const { isUserLoggedIn, login, signup } = this.state;
+    const { login, signup } = this.state;
     return (
       <Wrapper>
         <Player live={this.state.live} />
         <Schedule loadVideo={this.loadVideo} videos={this.dummyData()} />
-        <Modal show={!isUserLoggedIn}>
+        <Modal height={!login} show={!localStorage.getItem("authorization")}>
           {login && <Login handleclick={this.handleClick} />}
           {signup && <Signup handleclick={this.handleClick} />}
         </Modal>
