@@ -1,6 +1,8 @@
 import React from "react";
 import { Formik } from "formik";
-
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import { USER_LOGIN_SUCCESS, userLogin } from "./redux/actions";
 import {
   Input,
   Button,
@@ -10,9 +12,9 @@ import {
   UserWarn,
   Row,
   Column
-} from "../theme/index";
+} from "../../theme/index";
 
-const UserLoginForm = props => (
+const Login = props => (
   <div>
     <Formik
       initialValues={{
@@ -32,7 +34,25 @@ const UserLoginForm = props => (
 
         return errors;
       }}
-      onSubmit={values => {}}
+      onSubmit={(values, { setSubmitting, setErrors }) => {
+        props
+          .userLogin({ email: values.email, password: values.password })
+          .then(action => {
+            if (action.type === USER_LOGIN_SUCCESS) {
+              setSubmitting(false);
+              localStorage.setItem("authorization", action.authToken);
+              localStorage.setItem("appUser", JSON.stringify(action.appUser));
+              props.history.push("/");
+            } else {
+              setSubmitting(false);
+              setErrors({ error: action.response.data });
+            }
+          })
+          .catch(err => {
+            setSubmitting(false);
+            console.log("Error Logging in", err);
+          });
+      }}
       render={({
         values,
         errors,
@@ -123,4 +143,9 @@ const UserLoginForm = props => (
   </div>
 );
 
-export default UserLoginForm;
+export default withRouter(
+  connect(
+    null,
+    { userLogin }
+  )(Login)
+);

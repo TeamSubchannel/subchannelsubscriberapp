@@ -3,7 +3,7 @@ import { Wrapper } from "../theme/index";
 import Player from "../components/Player";
 import Schedule from "../components/Schedule";
 import Modal from "../shared/Modal";
-import Login from "../components/Login";
+import Login from "../components/Login/Login";
 import ReactDOM from "react-dom";
 import Signup from "../components/Signup/Signup";
 
