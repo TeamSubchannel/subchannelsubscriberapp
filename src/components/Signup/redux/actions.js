@@ -1,4 +1,4 @@
-import { client } from "../../../ajax";
+import { client, rawClient } from "../../../ajax";
 import formatError from "../../../formatErrors";
 import {
   sendingRequest,
@@ -15,8 +15,6 @@ export const signupSubscriberSuccess = createAction(
 );
 
 export const signupSubscriber = data => {
-  console.log(data);
-
   return dispatch => {
     dispatch(sendingRequest("signupSubscriber"));
     return client
@@ -33,6 +31,37 @@ export const signupSubscriber = data => {
       })
       .catch(err =>
         dispatch(receivedResponse("signupSubscriber", formatError(err)))
+      );
+  };
+};
+
+export const VERIFICATION_EMAIL_CHECK_SUCCESS =
+  "VERIFICATION_EMAIL_CHECK_SUCCESS";
+
+export const verificationEmailCheckSuccess = createAction(
+  VERIFICATION_EMAIL_CHECK_SUCCESS,
+  "appUser",
+  "message"
+);
+
+export const verificationEmailCheck = data => {
+  console.log(data);
+
+  return dispatch => {
+    dispatch(sendingRequest("verificationEmailCheck"));
+    return rawClient
+      .get(`/api/verifyemail/${data.channeName}/${data.email}`)
+      .then(res => {
+        receivedResponse("verificationEmailCheck");
+        return dispatch(
+          verificationEmailCheckSuccess(
+            res.data,
+            "Email Verification Successful"
+          )
+        );
+      })
+      .catch(err =>
+        dispatch(receivedResponse("verificationEmailCheck", formatError(err)))
       );
   };
 };

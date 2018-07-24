@@ -29,6 +29,8 @@ class Header extends Component {
     this.props.fetchProfile();
   }
 
+  componentWillReceiveProps(props) {}
+
   getInitials = () => {
     let name = `${this.props.firstName} ${this.props.lastName}`;
     let initials = name.match(/\b\w/g) || [];
@@ -40,6 +42,11 @@ class Header extends Component {
 
   onClickOption = val => {
     this.props.history.push(val.link);
+  };
+
+  logout = val => {
+    this.props.history.push(val.link);
+    localStorage.clear();
   };
 
   getOptions = () => {
@@ -61,7 +68,7 @@ class Header extends Component {
 
       {
         label: "Logout",
-        link: "/login",
+        link: "/",
         color: "#f2451a",
         iconClassName: "ace-icon fa fa-power-off",
         onClick: this.logout

@@ -20,16 +20,11 @@ class Signup extends Component {
   }
 
   navigate = (values, stage) => {
-    this.setState(
-      {
-        stageOne: stage === STAGEONE,
-        stageTwo: stage === STAGETWO,
-        values: { ...this.state.values, ...values }
-      },
-      () => {
-        console.log(this.state);
-      }
-    );
+    this.setState({
+      stageOne: stage === STAGEONE,
+      stageTwo: stage === STAGETWO,
+      values: { ...this.state.values, ...values }
+    });
   };
 
   render() {

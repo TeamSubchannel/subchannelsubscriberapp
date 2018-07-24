@@ -7,7 +7,7 @@ import registerServiceWorker from "./registerServiceWorker";
 
 import { Provider } from "react-redux";
 import createStore, { history } from "./store";
-import { ConnectedRouter } from "react-router-redux";
+// import { ConnectedRouter } from "react-router-redux";
 
 // eslint-disable-next-line
 navigator.appVersion.indexOf("Win") !== -1

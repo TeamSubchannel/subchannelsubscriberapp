@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import { Formik } from "formik";
 import { STAGETWO } from "./Signup";
-
+import {
+  verificationEmailCheck,
+  VERIFICATION_EMAIL_CHECK_SUCCESS
+} from "./redux/actions";
+import { connect } from "react-redux";
 import {
   Input,
   Button,
@@ -14,9 +18,14 @@ import {
 } from "../../theme/index";
 
 class SignupForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      error: ""
+    };
+  }
   render() {
-    const { navigate, values } = this.props;
-    console.log(values, "HERE");
+    const { navigate, values, verificationEmailCheck } = this.props;
 
     return (
       <div>
@@ -25,19 +34,46 @@ class SignupForm extends Component {
           initialValues={values}
           validate={values => {
             let errors = {};
-
+            let regex = /[^a-zA-Z0-9!]/g;
             if (!values.email) {
-              errors.email = "An email is required";
+              errors.email = "Email is required";
+            } else if (
+              !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+            ) {
+              errors.email = "Invalid email address";
             }
 
             if (!values.password) {
               errors.password = "A password is required";
+            } else if (regex.test(values.password)) {
+              errors.password = "Only A-Z, a-z, 0-9, ! accepted";
+            } else if (values.password.length < 6) {
+              errors.password = "Password must be 6 characters";
+            }
+
+            if (!values.name) {
+              errors.name = "Required";
             }
 
             return errors;
           }}
-          onSubmit={values => {
-            navigate(values, STAGETWO);
+          onSubmit={(values, { setSubmitting, setErrors }) => {
+            verificationEmailCheck("Subchannel", values.email)
+              .then(action => {
+                if (action.type === VERIFICATION_EMAIL_CHECK_SUCCESS) {
+                  navigate(values, STAGETWO);
+                  setSubmitting(true);
+                } else {
+                  this.setState({ error: action.response.data }, () => {
+                    console.log(this.state.error);
+                  });
+                  setSubmitting(false);
+                }
+              })
+              .catch(err => {
+                setSubmitting(false);
+                console.log("Error Logging in", err);
+              });
           }}
           render={({
             values,
@@ -52,13 +88,22 @@ class SignupForm extends Component {
               <Title2 fontsize="2.2em" dark margin=".7em 0 .7em 1em">
                 Get started
               </Title2>
+              <Row style={{ position: "relative" }}>
+                {/* {this.state.error && (
+                  <UserWarn left="0">
+                    <Text color="red" thisfontsize=".9em">
+                      {this.state.error}
+                    </Text>
+                  </UserWarn>
+                )} */}
+              </Row>
               <Column alignitems="center">
                 <Row>
                   <Label>
                     Full Name *
                     {touched.name &&
                       errors.name && (
-                        <UserWarn left="4em">
+                        <UserWarn left="6em">
                           <Text color="red" fontsize="1em">
                             {errors.name}
                           </Text>
@@ -153,4 +198,7 @@ class SignupForm extends Component {
   }
 }
 
-export default SignupForm;
+export default connect(
+  null,
+  { verificationEmailCheck }
+)(SignupForm);
