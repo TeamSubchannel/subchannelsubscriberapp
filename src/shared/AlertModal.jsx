@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { Row, Button, Text } from "../theme/index";
+import { Formik } from "formik";
+import { Row, Button, Text, Label, Input, UserWarn } from "../theme/index";
 
 const Backdrop = styled.div`
   position: fixed;
@@ -86,20 +87,71 @@ function ConfirmDelete({ togglemodal, handledelete, action }) {
           {action === "deleteAccount" && " account?"}
         </Text>
       </Row>
-      <Row justifycontent="center">
-        <StyledCancel onClick={togglemodal} type="button">
-          No
-        </StyledCancel>
-        <StyledDelete
-          onClick={() => {
-            handledelete(`${action}`);
+      {action === "deleteAccount" && (
+        <Formik
+          enableReinitialize
+          initialValues={{ password: "" }}
+          validate={values => {
+            let errors = {};
+
+            if (!values.password) {
+              errors.password = "Required";
+            }
+
+            return errors;
           }}
-          type="button"
-        >
-          {action === "cancelPlan" && "Cancel"}
-          {action === "deleteAccount" && "Delete"}
-        </StyledDelete>
-      </Row>
+          onSubmit={values => {
+            console.log(values);
+
+            handledelete("deleteAccount", values);
+          }}
+          render={({
+            values,
+            errors,
+            handleSubmit,
+            handleBlur,
+            handleChange,
+            touched
+          }) => (
+            <form onSubmit={handleSubmit}>
+              <Row justifycontent="center">
+                <Label>
+                  Password
+                  {touched.password &&
+                    errors.password && (
+                      <UserWarn left="5.1em">
+                        <Text color="red" fontsize=".8em">
+                          {errors.password}
+                        </Text>
+                      </UserWarn>
+                    )}
+                  <Input
+                    small
+                    value={values.password}
+                    name="password"
+                    type="password"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    margin=".2em 0 .8em 0"
+                    border={
+                      touched.password && errors.password && "1px solid red"
+                    }
+                  />
+                </Label>
+              </Row>
+              <Row justifycontent="center">
+                <StyledCancel onClick={togglemodal} type="button">
+                  No
+                </StyledCancel>
+                <StyledDelete type="submit">
+                  {action === "cancelPlan" && "Cancel"}
+                  {action === "deleteAccount" && "Delete"}
+                </StyledDelete>
+              </Row>
+            </form>
+          )}
+        />
+      )}
     </Wrapper>
   );
 }

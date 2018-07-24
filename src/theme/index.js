@@ -206,6 +206,12 @@ export const Input = styled.input`
         border: 1px solid transparent;
       }
     `};
+  ${props =>
+    props.small &&
+    css`
+      width: 150px;
+      height: 35px;
+    `};
 `;
 
 export const Label = styled.label`

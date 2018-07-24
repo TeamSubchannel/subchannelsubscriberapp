@@ -10,6 +10,8 @@ import { connect } from "react-redux";
 import {
   fetchProfile,
   updateProfile,
+  deleteProfile,
+  DELETE_PROFILE_SUCCESS,
   UPDATE_PROFILE_SUCCESS
 } from "./redux/actions";
 import { profileData } from "./redux/selector";
@@ -78,13 +80,22 @@ class Profile extends Component {
     });
   };
 
-  handleDelete = action => {
+  handleDelete = (action, values) => {
     console.log(action);
-    this.setState(() => {
-      return {
-        isOpen: !this.state.isOpen
-      };
-    });
+    if (action === "deleteAccount") {
+      this.props.deleteProfile(values).then(action => {
+        if (action.type === DELETE_PROFILE_SUCCESS) {
+          console.log("here");
+          this.setState(() => {
+            return {
+              isOpen: !this.state.isOpen
+            };
+          });
+        } else {
+          console.log(action.response.data);
+        }
+      });
+    }
   };
 
   toggleModal = e => {
@@ -135,5 +146,5 @@ class Profile extends Component {
 
 export default connect(
   profileData,
-  { fetchProfile, updateProfile }
+  { fetchProfile, updateProfile, deleteProfile }
 )(Profile);
