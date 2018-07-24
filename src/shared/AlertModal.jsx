@@ -101,8 +101,6 @@ function ConfirmDelete({ togglemodal, handledelete, action }) {
             return errors;
           }}
           onSubmit={values => {
-            console.log(values);
-
             handledelete("deleteAccount", values);
           }}
           render={({

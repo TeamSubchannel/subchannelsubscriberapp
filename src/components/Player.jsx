@@ -20,6 +20,7 @@ const Layer = styled.div`
   background: rgba(0, 0, 0, 0.5);
   width: 100%;
   height: 100%;
+  cursor: pointer;
   transition: all 1.1s;
   -webkit-transition all 1.1s;
   &:hover {

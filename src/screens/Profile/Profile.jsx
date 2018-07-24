@@ -81,7 +81,6 @@ class Profile extends Component {
   };
 
   handleDelete = (action, values) => {
-    console.log(action);
     if (action === "deleteAccount") {
       this.props.deleteProfile(values).then(action => {
         if (action.type === DELETE_PROFILE_SUCCESS) {
