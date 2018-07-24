@@ -1,4 +1,4 @@
-import client, { rawClient } from "./../../../ajax";
+import client from "./../../../ajax";
 import {
   sendingRequest,
   receivedResponse,
