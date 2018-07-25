@@ -195,6 +195,9 @@ export const Input = styled.input`
   &:focus {
     border: 1px solid #168787;
   }
+  @media (max-width: 400px) {
+    width: 225px;
+  }
   ${props =>
     props.notactive &&
     css`
@@ -223,6 +226,9 @@ export const Label = styled.label`
   margin: ${props => props.margin};
   position: relative;
   border: none;
+  @media (max-width: 400px) {
+    width: 225px;
+  }
   ${props =>
     props.notactive &&
     css`

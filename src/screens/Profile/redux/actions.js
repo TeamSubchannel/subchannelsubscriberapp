@@ -57,10 +57,12 @@ export const deleteProfileSuccess = createAction(
 );
 
 export const deleteProfile = data => {
+  console.log(data);
+
   return dispatch => {
     dispatch(sendingRequest("deleteProfile"));
     return client
-      .delete("/api/profile/delete", data)
+      .post("/api/profile/delete", data)
       .then(res => {
         dispatch(receivedResponse("deleteProfile"));
         return dispatch(deleteProfileSuccess(res.data));

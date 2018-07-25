@@ -15,6 +15,7 @@ import {
   UPDATE_PROFILE_SUCCESS
 } from "./redux/actions";
 import { profileData } from "./redux/selector";
+import { withRouter } from "react-router-dom";
 
 const Div = styled.div`
   width: 100%;
@@ -84,12 +85,17 @@ class Profile extends Component {
     if (action === "deleteAccount") {
       this.props.deleteProfile(values).then(action => {
         if (action.type === DELETE_PROFILE_SUCCESS) {
-          console.log("here");
-          this.setState(() => {
-            return {
-              isOpen: !this.state.isOpen
-            };
-          });
+          this.setState(
+            () => {
+              return {
+                isOpen: !this.state.isOpen
+              };
+            },
+            () => {
+              this.props.history.push("/");
+              localStorage.clear();
+            }
+          );
         } else {
           console.log(action.response.data);
         }
@@ -143,7 +149,9 @@ class Profile extends Component {
   }
 }
 
-export default connect(
-  profileData,
-  { fetchProfile, updateProfile, deleteProfile }
-)(Profile);
+export default withRouter(
+  connect(
+    profileData,
+    { fetchProfile, updateProfile, deleteProfile }
+  )(Profile)
+);
