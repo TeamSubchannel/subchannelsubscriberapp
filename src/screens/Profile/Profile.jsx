@@ -97,7 +97,9 @@ class Profile extends Component {
             }
           );
         } else {
-          console.log(action.response.data);
+          this.setState({ error: action.response.data }, () => {
+            console.log(this.state.error);
+          });
         }
       });
     }
@@ -143,6 +145,7 @@ class Profile extends Component {
           togglemodal={this.toggleModal}
           handledelete={this.handleDelete}
           action={this.state.action}
+          error={this.state.error && this.state.error}
         />
       </Div>
     );
