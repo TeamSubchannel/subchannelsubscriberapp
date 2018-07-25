@@ -14,7 +14,7 @@ export const fetchProfile = () => {
   return dispatch => {
     dispatch(sendingRequest("fetchProfile"));
     return client
-      .get(`api/subscriber`)
+      .get(`api/profile`)
       .then(res => {
         dispatch(receivedResponse("fetchProfile"));
         return dispatch(fetchProfileSuccess(res.data));
@@ -36,7 +36,7 @@ export const updateProfile = data => {
   return dispatch => {
     dispatch(sendingRequest("updateProfile"));
     return client
-      .put("/api/subscriber", data)
+      .put("/api/profile", data)
       .then(res => {
         dispatch(
           receivedResponse("updateProfile", { message: "Saved!" }, "MESSAGE")
@@ -57,6 +57,8 @@ export const deleteProfileSuccess = createAction(
 );
 
 export const deleteProfile = data => {
+  console.log(data);
+
   return dispatch => {
     dispatch(sendingRequest("deleteProfile"));
     return client
