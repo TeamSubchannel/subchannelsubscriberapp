@@ -70,7 +70,7 @@ const Icon = styled.i`
   cursor: pointer;
 `;
 
-function ConfirmDelete({ togglemodal, handledelete, action }) {
+function ConfirmDelete({ togglemodal, handledelete, action, error }) {
   return (
     <Wrapper>
       <StyledRow>
@@ -115,14 +115,13 @@ function ConfirmDelete({ togglemodal, handledelete, action }) {
               <Row justifycontent="center">
                 <Label>
                   Password
-                  {touched.password &&
-                    errors.password && (
-                      <UserWarn left="5.1em">
-                        <Text color="red" fontsize=".8em">
-                          {errors.password}
-                        </Text>
-                      </UserWarn>
-                    )}
+                  {error && (
+                    <UserWarn left="5.1em">
+                      <Text color="red" fontsize=".8em">
+                        {error && error}
+                      </Text>
+                    </UserWarn>
+                  )}
                   <Input
                     small
                     value={values.password}
@@ -166,6 +165,7 @@ export default class Modal extends Component {
             togglemodal={this.props.togglemodal}
             handledelete={this.props.handledelete}
             action={this.props.action}
+            error={this.props.error}
           />
         </StyledModal>
       </Backdrop>
